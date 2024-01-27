@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_History_app.ServerPage"
+             xmlns:viewmodel="clr-namespace:MAUI_History_app.ViewModel"
+             x:DataType="viewmodel:ServerViewModel"
+             BackgroundColor="Black"
+             Title="ServerPage">
+    <Grid ColumnDefinitions="*,*"
+          RowDefinitions="40,40,40"  HorizontalOptions="Center" ColumnSpacing="10" RowSpacing="7"
+               VerticalOptions="Center"  >
+        <Label 
+            Text="Server" Grid.Column="0" Grid.Row="0" 
+            FontSize="20"    TextColor="White"
+             HorizontalOptions="Center"
+               VerticalOptions="Center"
+           />
+        <Label 
+            Text="Port" Grid.Column="0" Grid.Row="1"
+            TextColor="White"
+            FontSize="20"
+             HorizontalOptions="Center"
+               VerticalOptions="Center"
+          />
+        <Entry Grid.Column="1" Grid.Row="0"
+                x:Name="ServerEntry"              
+                Margin="4,0"
+            
+                BackgroundColor="Blue"
+                CharacterSpacing="4"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Servername}"
+                TextColor="White"
+                ClearButtonVisibility="WhileEditing"
+                WidthRequest="230" />
+        <Entry Grid.Column="1" Grid.Row="1"
+                x:Name="PortEntry"              
+                Margin="4,0"
+           
+              
+                BackgroundColor="Blue"
+                CharacterSpacing="4"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Port}"
+                TextColor="White"
+                ClearButtonVisibility="WhileEditing"
+                WidthRequest="230"
+               />
+        <Button Grid.Column="1" Grid.Row="2"
+                  Command="{Binding SaveServerPortCommand }"
+                IsEnabled="{Binding IsNotBusy}"
+            BackgroundColor="Blue"
+                Text="Save Connection"
+                WidthRequest="100"
+            />
+    </Grid>
+</ContentPage>

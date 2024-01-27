@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
+             xmlns:model="clr-namespace:MAUI_History_app.Model"
+             xmlns:viewmodel="clr-namespace:MAUI_History_app.ViewModel"
+             x:DataType="viewmodel:HistoriesViewModel"
+             Title="{Binding Title}"
+              BackgroundColor="Black"
+             x:Class="MAUI_History_app.MainPage">
+
+    <Grid ColumnDefinitions="140,138,145"   
+
+      RowDefinitions="*,auto">
+
+
+        <CollectionView 
+            ItemsSource="{Binding Histories}"
+            BackgroundColor="Transparent"
+                        Grid.ColumnSpan="2"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:History">
+                    <Grid Padding="10" >
+                        <Frame HeightRequest="95" Padding="0"
+                               BackgroundColor="Black">
+                            <Grid Padding="0" RowDefinitions="auto,auto,auto"
+                                  ColumnDefinitions="AUTO">
+                                <Label Grid.Row="0" Grid.Column="0"
+                                    Text="{Binding OPERATION_CODE}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="White"/>
+                                <Label Grid.Row="1" Grid.Column="0"
+                                    Text="{Binding STATUS_CODE}" 
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                        TextColor="White"/>
+                                <Label Grid.Row="2" Grid.Column="0"
+                                    Text="{Binding TIME_STAMP}"
+                                        TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+
+
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Search"
+                Command="{Binding GetHistoriesCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1" Grid.Column="1"
+                BackgroundColor="Blue"
+                TextColor="White" WidthRequest="80"
+                Margin="4"/>
+
+        <Button Text="Scan"
+            Command="{Binding NavigateCommand}"
+             
+              FontSize="22"
+             Grid.Row="1" Grid.Column="3"
+                BackgroundColor="Blue"
+                TextColor="White" WidthRequest="80"
+                Margin="4"/>
+
+        <Entry Grid.Column="0" Grid.Row="1"
+               Placeholder="Enter SN"
+                x:Name="SNEntry"              
+                Margin="4,0"
+                BackgroundColor="Blue"
+                CharacterSpacing="4"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Text}"
+                TextColor="White"
+                VerticalOptions="Center"
+                ClearButtonVisibility="WhileEditing"
+                WidthRequest="202" />
+
+
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                   IsRunning="{Binding IsBusy}"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Grid.RowSpan="2"
+                   Grid.ColumnSpan="2" />
+
+    </Grid>
+</ContentPage>
